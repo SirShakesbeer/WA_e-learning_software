@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Attribute & Methoden 1</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #2c3e50;
+      color: #fff;
+      margin: 0;
+      padding: 1rem;
+    }
+    .page {
+      display: none;
+    }
+    .page.active {
+      display: block;
+    }
+    #cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    .card {
+      background-color: #f0f0f0;
+      color: #000;
+      border: 1px solid #aaa;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: grab;
+    }
+    .zone-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      justify-content: center;
+    }
+    .zone-wrapper {
+      border: 2px dashed #ccc;
+      border-radius: 6px;
+      min-height: 6rem;
+      padding: 1rem;
+      background-color: #34495e;
+    }
+    .zone-wrapper.correct {
+      border-color: limegreen;
+    }
+    .zone-title {
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+      text-align: center;
+    }
+    #feedback {
+      text-align: center;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .nav-button {
+      background-color: #2c3e50;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .nav-button:hover {
+      background-color: #34495e;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page active">
+    <h2>Willkommen zur Lerneinheit: <em>Methoden und Attribute</em></h2>
+    <p>
+      In dieser kurzen Einheit lernst du den Unterschied zwischen <strong>Attributen</strong> und <strong>Methoden</strong> kennen.<br><br>
+      Außerdem wirst du spielerisch üben, wie man sie den richtigen <strong>Klassen</strong> zuordnet.<br><br>
+      Beginnen wir mit den Basics!<br><br>
+
+      <strong>Grundbegriffe:</strong><br>
+      In der objektorientierten Programmierung beschreiben wir mit <strong>Klassen</strong> allgemeine Baupläne für Dinge – z.B. für Roboter oder Pflanzen. <br>
+      Wenn wir aus einer Klasse ein konkretes Exemplar erzeugen - z.B Wasser-Roboter, spricht man von einem <strong>Objekt</strong> oder einer <strong>Instanz</strong>.<br><br>
+
+      <strong>Attribut – die Eigenschaft eines Objekts</strong><br>
+      Ein <strong>Attribut</strong> beschreibt den <em>Zustand</em> oder eine <em>Eigenschaft</em> eines Objekts.<br>
+      Beispiel: Die Klasse <code>Roboter</code> besitzt das Attribut <code>farbe</code>.<br>
+      Ein konkreter Roboter könnte dann z.B. die Farbe <em>grün</em> haben.<br>
+      → <code>farbe</code> ist ein Attribut.<br><br>
+
+      <strong>Methode – das Verhalten eines Objekts</strong><br>
+      Eine <strong>Methode</strong> beschreibt ein <em>Verhalten</em> oder eine <em>Funktion</em>, die ein Objekt ausführen kann.<br>
+      Beispiel: Die Klasse <code>Roboter</code> enthält die Methode <code>spreche()</code>.<br>
+      Ein konkreter Roboter kann dann z.&nbsp;B. <code>roboter.spreche()</code> aufrufen.<br>
+      → <code>spreche()</code> ist eine Methode.<br><br>
+
+      <strong>Kurzfassung:</strong><br>
+      – <strong>Attribute</strong> = Eigenschaften (z.&nbsp;B. <code>farbe</code>)<br>
+      – <strong>Methoden</strong> = Fähigkeiten (z.&nbsp;B. <code>spreche()</code>)<br><br>
+
+      ➡️ Klicke auf den Pfeil unten rechts, um mit dem Spiel zu beginnen!
+    </p>
+  </div>
+
+  <div class="page">
+    <h2>Übung: Zuordnung von Attributen und Methoden</h2>
+    <div id="cards">
+      <div class="card" draggable="true" data-answer="Roboter-Attribute">materialfarbe</div>
+      <div class="card" draggable="true" data-answer="Roboter-Attribute">materialart</div>
+      <div class="card" draggable="true" data-answer="Roboter-Attribute">roboterGroeße</div>
+      <div class="card" draggable="true" data-answer="Roboter-Methoden">bewegeDich()</div>
+      <div class="card" draggable="true" data-answer="Roboter-Methoden">fliegen()</div>
+      <div class="card" draggable="true" data-answer="Roboter-Methoden">angreifen()</div>
+      <div class="card" draggable="true" data-answer="Pflanze-Attribute">bluetenfarbe</div>
+      <div class="card" draggable="true" data-answer="Pflanze-Attribute">wasserbedarf</div>
+      <div class="card" draggable="true" data-answer="Pflanze-Attribute">anzahlBlaetter</div>
+      <div class="card" draggable="true" data-answer="Pflanze-Methoden">wachse()</div>
+      <div class="card" draggable="true" data-answer="Pflanze-Methoden">photosynthese()</div>
+      <div class="card" draggable="true" data-answer="Pflanze-Methoden">verbluehe()</div>
+    </div>
+
+    <div class="zone-block">
+      <div>
+        <div class="zone-title">🔧 Roboter – Attribute</div>
+        <div class="zone-wrapper zone" id="Roboter-Attribute"></div>
+      </div>
+      <div>
+        <div class="zone-title">🔧 Roboter – Methoden</div>
+        <div class="zone-wrapper zone" id="Roboter-Methoden"></div>
+      </div>
+      <div>
+        <div class="zone-title">🌿 Pflanze – Attribute</div>
+        <div class="zone-wrapper zone" id="Pflanze-Attribute"></div>
+      </div>
+      <div>
+        <div class="zone-title">🌿 Pflanze – Methoden</div>
+        <div class="zone-wrapper zone" id="Pflanze-Methoden"></div>
+      </div>
+    </div>
+
+    <p id="feedback"></p>
+  </div>
+
+  <div class="page">
+    <h2>Zugriffsmodifizierer: Public und Private</h2>
+    <p>In objektorientierten Programmiersprachen steuern wir mit sogenannten <strong>Zugriffsmodifizierern</strong>, wer auf bestimmte Bestandteile einer Klasse zugreifen darf.</p>
+    <p>Das machen wir auch in unserem Klassendiagramm kenntlich.</p>
+
+    <p>Die beiden wichtigsten Modifizierer sind:</p>
+
+    <p><strong><code>public</code></strong></p>
+    <ul>
+      <li>Das Element ist <em>von außen sichtbar</em></li>
+      <li>Instanzen anderer Klassen können direkt darauf zugreifen</li>
+      <li>Im Klassendiagramm wird es durch ein Pluszeichen <code>+</code> dargestellt</li>
+      <li>Beispiel: <code>+ wachse()</code></li>
+      <li>Oft sind Methoden <code>public</code>, da sie das Verhalten eines Objekts nach außen bereitstellen und anderen Klassen ermöglichen, gezielt darauf zuzugreifen</li>
+    </ul>
+
+    <p><strong><code>private</code></strong></p>
+    <ul>
+      <li>Das Element ist <em>nur innerhalb der eigenen Klasse sichtbar</em></li>
+      <li>Von außen ist kein direkter Zugriff möglich</li>
+      <li>Im Klassendiagramm wird es durch ein Minuszeichen <code>–</code> dargestellt</li>
+      <li>Beispiel: <code>- farbe</code></li>
+      <li>Oft sind Attribute <code>private</code>, um den internen Zustand vor ungewolltem Zugriff zu schützen – das nennt man <em>Kapselung</em></li>
+    </ul>
+
+    <p>
+      Damit man trotzdem kontrolliert auf <code>private</code> Attribute zugreifen kann, nutzt man sogenannten Methoden <strong>Getter</strong> und <strong>Setter</strong>:
+    </p>
+    <ul>
+      <li>Ein <strong>Getter</strong> gibt den aktuellen Wert eines privaten Attributs (z.B. - farbe) zurück<br>
+        Beispiel: <code>+ getFarbe()</code>
+      </li>
+      <li>Ein <strong>Setter</strong> ändert den Wert eines privaten Attributs kontrolliert<br>
+        Beispiel: <code>+ setFarbe(neueFarbe)</code>
+      </li>
+      <li>Getter und Setter sind <code>public</code>, damit andere Klassen gezielt und sicher auf Attribute zugreifen können</li>
+    </ul>
+    
+  </div>
+
+  <div class="page">
+    <h2>Übung: Zugriffsmodifizierer</h2>
+    <p>Wähle aus, ob die folgenden Bestandteile einer Klasse eher <code>public</code> oder <code>private</code> sein sollten. Denk an das Prinzip der <em>Kapselung</em> und den Einsatz von Getter/Setter!</p>
+  
+    <form id="accessQuiz">
+      <p>
+        <strong>1. Attribut: farbe</strong><br>
+        <label><input type="radio" name="farbe" value="public"> public</label><br>
+        <label><input type="radio" name="farbe" value="private"> private</label><br>
+      </p>
+  
+      <p>
+        <strong>2. Methode: wachse()</strong><br>
+        <label><input type="radio" name="wachse" value="public"> public</label><br>
+        <label><input type="radio" name="wachse" value="private"> private</label><br>
+      </p>
+  
+      <p>
+        <strong>3. Methode: getFarbe()</strong><br>
+        <label><input type="radio" name="getFarbe" value="public"> public</label><br>
+        <label><input type="radio" name="getFarbe" value="private"> private</label><br>
+      </p>
+  
+      <p>
+        <strong>4. Methode: setFarbe()</strong><br>
+        <label><input type="radio" name="setFarbe" value="public"> public</label><br>
+        <label><input type="radio" name="setFarbe" value="private"> private</label><br>
+      </p>
+  
+      <p>
+        <strong>5. Attribut: wasserbedarf</strong><br>
+        <label><input type="radio" name="wasserbedarf" value="public"> public</label><br>
+        <label><input type="radio" name="wasserbedarf" value="private"> private</label><br>
+      </p>
+  
+      <button type="button" onclick="checkAccessQuiz()">Lösung prüfen</button>
+    </form>
+  
+    <p id="quizFeedback"></p>
+  </div>
+
+  <div class="page">
+    <h2>Datentypen in Klassen</h2>
+    <p>
+      In Klassen verwenden wir verschiedene <strong>Datentypen</strong>, um den <em>Wertbereich</em> von Attributen und Rückgabewerten zu beschreiben.
+    </p>
+    <p>
+      Hier sind einige der wichtigsten grundlegenden Datentypen:
+    </p>
+    <ul>
+      <li><code>int</code> – ganze Zahl (z.B. <code>15</code>, <code>-2</code>)</li>
+      <li><code>float</code> oder <code>double</code> – Kommazahl (z.B. <code>3.14</code>, <code>-0.5</code>)</li>
+      <li><code>boolean</code> – wahr oder falsch (<code>true</code> / <code>false</code>)</li>
+      <li><code>String</code> – Text (z.B. <code>"grün"</code> oder <code>"Roboter-X"</code>)</li>
+    </ul>
+  
+    <p><strong>Beispiele für die Schreibweise der Attribute und Methoden mit Typ im Klassendiagramm:</strong></p>
+    <ul>
+      <li><code> + getfarbe(): String</code></li>
+      <li><code> - anzahlBlaetter: int</code></li>
+      <li><code> - roboterGroesse: double</code></li>
+    </ul>
+
+    <h2>Methoden genauer erklärt</h2>
+    <p>
+      Eine <strong>Methode</strong> beschreibt eine Fähigkeit oder ein Verhalten eines Objekts – wie <code>fliegen()</code> oder <code>spreche()</code>.
+    </p>
+
+    <p>
+      Methoden haben oft:
+    </p>
+    <ul>
+      <li><strong>Einen Rückgabetyp</strong> – das ist der Typ des Werts, den die Methode zurückliefert (z.&nbsp;B. <code>String</code>, <code>int</code>, <code>void</code> für "nichts zurückgeben")</li>
+      <li><strong>Parameter</strong> – Werte, die beim Aufruf übergeben werden (in den Klammern)</li>
+    </ul>
+
+    <p><strong>Beispiel:</strong></p>
+    <code>public String spreche(String wort)</code>
+    <ul>
+      <li><code>public</code> → sichtbar von außen</li>
+      <li><code>String</code> → Rückgabetyp</li>
+      <li><code>spreche</code> → Methodenname</li>
+      <li><code>(String wort)</code> → die Methode bekommt ein Wort übergeben</li>
+    </ul>
+
+    <h3>Konstruktoren</h3>
+    <p>
+      Ein <strong>Konstruktor</strong> ist eine besondere Methode, die automatisch aufgerufen wird, wenn ein neues Objekt erzeugt wird.
+      Er hat:
+    </p>
+    <ul>
+      <li>Keinen Rückgabetyp</li>
+      <li>Immer denselben Namen wie die Klasse</li>
+    </ul>
+
+    <p><strong>Beispiel:</strong></p>
+    <code>public Roboter(String farbe, float groesse)</code><br>
+    ⟶ Diese Methode erzeugt einen neuen <code>Roboter</code> mit Farbe und Größe.
+  </div>
+
+  <div class="page">
+    <h2>Übung: Verknüfung von Zugriffsmodifizierern und Datentypen</h2>
+    <p>
+      Lies dir die Beschreibung der Klasse <strong>Pflanze</strong> durch und trage die fehlenden Zeilen im UML-Stil ein.
+    </p>
+  
+    <p><strong>Beschreibung:</strong></p>
+    <ul>
+      <li>Die Pflanze hat ein <strong>privates</strong> Attribut <code>anzahlBlaetter</code> vom Typ <code>int</code>.</li>
+      <li>Sie hat eine Methode <code>wachse()</code>, die <strong>öffentlich</strong> ist und keinen Rückgabewert hat.</li>
+      <li>Sie besitzt eine Methode <code>getAnzahlBlaetter()</code>, die <strong>öffentlich</strong> ist und einen <code>int</code>-Wert zurückgibt.</li>
+    </ul>
+  
+    <form id="umlFillForm">
+      <p><strong>1. Attribut:</strong><br>
+        <input type="text" id="input1" placeholder="+/- attributName: datenTyp" size="30">
+      </p>
+  
+      <p><strong>2. Methode wachse():</strong><br>
+        <input type="text" id="input2" placeholder="+/- methodenName(): datenTyp" size="30">
+      </p>
+  
+      <p><strong>3. Methode getAnzahlBlaetter():</strong><br>
+        <input type="text" id="input3" placeholder="+/- methodenName(): datenTyp" size="30">
+      </p>
+  
+      <button type="button" onclick="checkUMLFill()">Lösung prüfen</button>
+    </form>
+  
+    <p id="umlFillFeedback"></p>
+  </div>
+  
+  
+  <div class="navigation">
+    <button class="nav-button" id="prevBtn">⬅️</button>
+    <button class="nav-button" id="nextBtn">➡️</button>
+  </div>
+
+  <script>
+    const pages = document.querySelectorAll('.page');
+    let currentPage = 0;
+
+    const showPage = (index) => {
+      pages.forEach((p, i) => {
+        p.classList.toggle('active', i === index);
+      });
+    };
+
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      if (currentPage < pages.length - 1) {
+        currentPage++;
+        showPage(currentPage);
+      }
+    });
+
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      if (currentPage > 0) {
+        currentPage--;
+        showPage(currentPage);
+      }
+    });
+
+    const zones = document.querySelectorAll('.zone');
+    const feedback = document.getElementById("feedback");
+
+    zones.forEach(zone => {
+      zone.addEventListener('dragover', e => e.preventDefault());
+
+      zone.addEventListener('drop', e => {
+        e.preventDefault();
+        const data = e.dataTransfer.getData('text/plain');
+        const dropElem = new DOMParser().parseFromString(data, "text/html").body.firstChild;
+        dropElem.draggable = false;
+
+        const cardsContainer = document.getElementById("cards");
+        const originalCard = [...cardsContainer.children].find(c => c.textContent === dropElem.textContent);
+
+        if (zone.id === dropElem.dataset.answer) {
+          zone.appendChild(dropElem);
+          zone.classList.add("correct");
+          if (originalCard) {
+            cardsContainer.removeChild(originalCard);
+          }
+          feedback.textContent = "✅ Richtig zugeordnet!";
+        } else {
+          feedback.textContent = "❌ Falsch. Probiere es noch einmal!";
+        }
+      });
+    });
+
+    function checkAccessQuiz() {
+      const answers = {
+        farbe: "private",
+        wachse: "public",
+        getFarbe: "public",
+        setFarbe: "public",
+        wasserbedarf: "private"
+      };
+
+      let correct = 0;
+      let total = Object.keys(answers).length;
+
+      for (let key in answers) {
+        const selected = document.querySelector(`input[name="${key}"]:checked`);
+        if (selected && selected.value === answers[key]) {
+          correct++;
+        }
+      }
+
+      const feedback = document.getElementById("quizFeedback");
+      if (correct === total) {
+        feedback.textContent = `✅ Super! Alle ${total} richtig!`;
+        feedback.style.color = "lime";
+      } else {
+        feedback.textContent = `❌ Du hast ${correct} von ${total} richtig. Versuch’s noch mal!`;
+        feedback.style.color = "orange";
+      }
+    }
+
+    function checkUMLFill() {
+    const expected = [
+      "- anzahlBlaetter: int",
+      "+ wachse(): void",
+      "+ getAnzahlBlaetter(): int"
+    ];
+
+    const inputs = [
+      document.getElementById("input1").value.trim(),
+      document.getElementById("input2").value.trim(),
+      document.getElementById("input3").value.trim()
+    ];
+
+    let correct = 0;
+    for (let i = 0; i < expected.length; i++) {
+      if (inputs[i] === expected[i]) {
+        correct++;
+      }
+    }
+
+    const feedback = document.getElementById("umlFillFeedback");
+    if (correct === expected.length) {
+      feedback.textContent = "✅ Alles richtig! Du hast den UML-Stil verstanden!";
+      feedback.style.color = "lime";
+    } else {
+      feedback.textContent = `❌ Du hast ${correct} von ${expected.length} richtig. Versuch's nochmal!`;
+      feedback.style.color = "orange";
+    }
+  }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('dragstart', e => {
+          e.dataTransfer.setData('text/plain', card.outerHTML);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

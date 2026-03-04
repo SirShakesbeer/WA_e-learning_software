@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Interface 2</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #2c3e50;
+      color: white;
+      padding: 1rem;
+    }
+    .page {
+      display: none;
+    }
+    .page.active {
+      display: block;
+    }
+    .info-box {
+      background-color: #34495e;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+    .interface-box {
+      border: 2px solid white;
+      width: 300px;
+      border-radius: 8px;
+      overflow: hidden;
+      font-family: monospace;
+      box-shadow: 0 0 10px #1abc9c55;
+      background-color: #34495e;
+    }
+    .interface-header, .card-front .class-header {
+      background-color: #1abc9c;
+      padding: 0.5rem;
+      text-align: center;
+      font-weight: bold;
+    }
+    .interface-header .label {
+      display: block;
+      font-size: 0.8rem;
+      margin-bottom: 0.2rem;
+    }
+    .interface-methods, .card-front .class-methods {
+      background-color: #148f77;
+      padding: 0.5rem;
+    }
+    .layout-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 4rem 0;
+      position: relative;
+    }
+    .arrow {
+      flex: 1;
+      height: 2px;
+      border-top: 2px dashed white;
+      position: relative;
+      margin: 0 1rem;
+    }
+    .arrow::after {
+      content: "";
+      position: absolute;
+      left: -6px;
+      top: -6px;
+      width: 12px;
+      height: 12px;
+      background-color: transparent;
+      border-left: 2px solid white;
+      border-top: 2px solid white;
+      transform: rotate(-45deg);
+    }
+    button {
+      background-color: #1abc9c;
+      border: none;
+      color: white;
+      padding: 0.5rem 1rem;
+      font-size: 1.1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    button:hover {
+      background-color: #16a085;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .nav-button {
+      background-color: #2c3e50;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .nav-button:hover {
+      background-color: #34495e;
+    }
+    .flip-card {
+      background-color: transparent;
+      width: 300px;
+      height: 200px;
+      perspective: 1000px;
+    }
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: left;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border: 2px solid white;
+      border-radius: 8px;
+      font-family: monospace;
+      box-shadow: 0 0 10px #1abc9c55;
+    }
+    .card-front {
+      background-color: #34495e;
+    }
+    .card-back {
+      background-color: #2c3e50;
+      color: white;
+      transform: rotateY(180deg);
+      padding: 1rem;
+    }
+    .flip-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Erste Seite: Einführung -->
+<div class="page active">
+  <h2>Interfaces in Klassendiagrammen</h2>
+  <p>Ein <strong>Interface</strong> ist eine Art Vertrag: Es beschreibt, welche Methoden eine Klasse bereitstellen muss, ohne die konkrete Implementierung anzugeben.</p>
+
+  <div class="info-box">
+    <p>Im Klassendiagramm erkennst du ein Interface an dem Schlüsselwort <code>&laquo;interface&raquo;</code> über dem Klassen-Namen.</p>
+  </div>
+
+  <div class="info-box">
+    <p>
+      Eine Klasse wie <strong>Kampf-Roboter</strong> kann das Interface <strong>Roboter</strong> verwenden, um zu sagen:
+      „Ich verspreche, dass ich alle diese Fähigkeiten besitze – ich kann spucken, mich bewegen und kämpfen.“
+    </p>
+  </div>
+
+  <div class="info-box">
+    <p>
+      Die gestrichelte Linie mit offener Pfeilspitze zeigt <strong>immer zur Interface-Klasse</strong>. 
+      So erkennt man: <strong>Diese Klasse erfüllt die Anforderungen des Interfaces.</strong>
+    </p>
+  </div>
+
+  <div class="info-box">
+    <p>
+      Ein Interface selbst hat <strong>keine ausgehenden Pfeile</strong>, weil es nur vorgibt, was andere Klassen können müssen – 
+      es kennt die Klassen aber nicht.
+    </p>
+  </div>
+
+  <div class="layout-arrow">
+    <div class="interface-box">
+      <div class="interface-header">
+        <span class="label">&laquo;interface&raquo;</span>
+        Roboter
+      </div>
+      <div class="interface-methods">
+        <div>+ spucken(): void</div>
+        <div>+ bewegen(): void</div>
+        <div>+ kämpfen(): void</div>
+      </div>
+    </div>
+    <div class="arrow"></div>
+    <div class="interface-box">
+      <div class="interface-header">Kampf-Roboter</div>
+      <div class="interface-methods">
+        <div>+ spucken(): void</div>
+        <div>+ bewegen(): void</div>
+        <div>+ kämpfen(): void</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <p><strong>Überlege:</strong> Was wäre, wenn eine Roboterklasse <em>nicht</em> alle Methoden des Interfaces implementiert? Was würde passieren?</p>
+  </div>
+
+  <div class="info-box">
+    <p><strong>Mini-Aufgabe:</strong> Welche konkreten Roboter-Typen könntest du dir vorstellen? Welche dieser Methoden müssten sie auf jeden Fall implementieren? Notiere dir gedankdlich 2 Beispiele!</p>
+  </div>
+
+  <p>Das Szenario bereitet dich auf die nächste Mini-Aufgabe vor!</p>
+</div>
+
+<!-- Flipcard Mini-Game -->
+<div class="page">
+  <h2>Interface-Inspector – FlipCard</h2>
+  <p>Nur eine Klasse implementiert das Interface <strong>MedBot</strong> korrekt. Klicke auf eine Karte, um sie umzudrehen und deinen Verdacht zu überprüfen!</p>
+
+  <div class="interface-box" style="margin-bottom: 2rem;">
+    <div class="interface-header">
+      <span class="label">&laquo;interface&raquo;</span>
+      MedBot
+    </div>
+    <div class="interface-methods">
+      <div>+ messen(): float</div>
+      <div>+ desinfizieren(): void</div>
+    </div>
+  </div>
+
+  <div class="flip-wrapper">
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="card-front">
+          <div class="class-header">MedBot A</div>
+          <div class="class-methods">
+            <div>- reinigungsStatus: int</div>
+            <div>+ messen(): float</div>
+            <div>+ desinfizieren(): void</div>
+          </div>
+        </div>
+        <div class="card-back">
+          ✅ Diese Klasse implementiert das Interface korrekt.
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="card-front">
+          <div class="class-header">MedBot B</div>
+          <div class="class-methods">
+            <div>- reinigungsStatus: int</div>
+            <div>+ messen(): int</div>
+            <div>+ desinfizieren(): void</div>
+          </div>
+        </div>
+        <div class="card-back">
+          ❌ Fehler: <code>messen()</code> hat den falschen Rückgabetyp (int statt float).
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="card-front">
+          <div class="class-header">MedBot C</div>
+          <div class="class-methods">
+            <div>- messen: float</div>
+            <div>- reinigungsStatus: int</div>
+            <div>+ desinfizieren(): void</div>
+          </div>
+        </div>
+        <div class="card-back">
+          ❌ Fehler: <code>messen</code> ist ein Attribut, aber das Interface verlangt eine Methode.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    💬 Tipp: Achte immer genau auf Klammern – sie machen den Unterschied zwischen Methode und Attribut!
+  </div>
+</div>
+
+<!-- Navigation -->
+<div class="navigation">
+  <button class="nav-button" id="prevBtn">⬅️</button>
+  <button class="nav-button" id="nextBtn">➡️</button>
+</div>
+
+<script>
+  const pages = document.querySelectorAll('.page');
+  let currentPage = 0;
+
+  const showPage = (index) => {
+    pages.forEach((p, i) => {
+      p.classList.toggle('active', i === index);
+    });
+  };
+
+  document.getElementById('nextBtn').addEventListener('click', () => {
+    if (currentPage < pages.length - 1) {
+      currentPage++;
+      showPage(currentPage);
+    }
+  });
+
+  document.getElementById('prevBtn').addEventListener('click', () => {
+    if (currentPage > 0) {
+      currentPage--;
+      showPage(currentPage);
+    }
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    showPage(currentPage);
+  });
+</script>
+</body>
+</html>
