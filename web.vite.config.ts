@@ -4,9 +4,10 @@ import { getMaps, getMapsOptimizers, getMapsScripts, LogLevel, OptimizeOptions }
 import {VitePluginNode} from "vite-plugin-node";
 
 const maps = getMaps();
+const logLevelKey = process.env.LOG_LEVEL as keyof typeof LogLevel | undefined;
 
 let optimizerOptions: OptimizeOptions = {
-    logs: process.env.LOG_LEVEL && process.env.LOG_LEVEL in LogLevel ? LogLevel[process.env.LOG_LEVEL] : LogLevel.NORMAL,
+    logs: logLevelKey && logLevelKey in LogLevel ? LogLevel[logLevelKey] : LogLevel.NORMAL,
 };
 
 if (process.env.TILESET_OPTIMIZATION && process.env.TILESET_OPTIMIZATION === "true") {

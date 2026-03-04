@@ -873,7 +873,7 @@
         {
          "columns":25,
          "firstgid":82688,
-         "image":"..\/..\/..\/..\/..\/..\/..\/..\/wsl.localhost\/Ubuntu-24.04\/home\/mango\/studium\/E-Learning\/Projekt\/Spiel\/tilesets\/WA_Room_Builder2.png",
+         "image":"tilesets\/WA_Room_Builder2.png",
          "imageheight":1280,
          "imagewidth":800,
          "margin":0,

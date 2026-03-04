@@ -665,7 +665,7 @@
         {
          "columns":12,
          "firstgid":3956,
-         "image":"tilesets\/WA_Decoration2.png",
+         "image":"tilesets\/WA_Decoration.png",
          "imageheight":256,
          "imagewidth":384,
          "margin":0,
