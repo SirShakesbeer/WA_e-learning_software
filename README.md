@@ -1,3 +1,32 @@
+# E-Learning: Software Entwicklung
+
+Dieses Projekt wurde im Rahmen des Moduls "E-Learning" an der HTWK (unter Herr Stolze) entwickelt. Für uns (die Entwickler) ist es ein Projekt, in dem wir verschiedene Lehr-/Lernmethoden anwenden konnten. Für Spieler soll das Projekt beim Verstehen verschiedener Aspekte um das Thema Software-Entwicklung (z.B. Git) helfen.
+
+## Setup
+
+Um das Projekt auszuführen, bitte befolge die Anweisungen unter [Installation and Testing](#-installation). Dieses Video ist ebenfalls hilfreich: https://www.youtube.com/watch?v=5yTB23mcnP0.
+
+## Entwickler
+
+- Kristina Grishchenko
+- Leon Pfingst
+- Christin Reinhardt
+- Paul Thomasius
+
+## Ergänzungen innerhalb der Fristverlängerung
+
+### Programmierraum:
+- wurde duch einen Git-Raum ersetzt (Umgestaltung des Raumes)
+- durch Box-Pushing wird das git add, git commit und git push spierlerisch abgebildet
+
+### Plaungsraum:
+- Erstellen der Mini-Games (siehe Ticket #2) für Info-Board Level 2, Attribute & Methoden Level 2, Interface Level 2,  Aggregations/Komposition Level 2, Kunden-Klassendiagramm Level 2
+
+## Ausblick:
+Leider war es uns nicht möglich alle angestrebten Ziele umzusetzen - für den Planungsraum existiert kein Speichern der Spielstände. Genauso auch nicht die wachsendene Blume zum Darstellen des Lernfortschritts (siehe Ticket #2). Ebenso ist das Abschließen von Level 1 und Fortfahren zu Level 2 in einem einzigen Spiel nicht möglich.
+Als Alternative wurde der Branch planungsraum-level-2 ertsellt. Auf diesem Branch kann gewechselt werden, um sich die Spiele nur für Level 2 vom Planungsraum anzuschauen und zu spielen.
+
+
 # 🗺️ WorkAdventure Map Starter Kit
 
 <a href="https://discord.gg/G6Xh9ZM9aR" target="blank"><img src="https://img.shields.io/discord/821338762134290432.svg?style=flat&label=Join%20Community&color=7289DA" alt="Join Community Badge"/></a>
