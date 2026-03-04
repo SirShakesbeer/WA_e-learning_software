@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Aggregation und Komposition</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #2c3e50;
+      color: #fff;
+      margin: 0;
+      padding: 1rem;
+    }
+    .page {
+      display: none;
+    }
+    .page.active {
+      display: block;
+    }
+    .info-box {
+      background-color: #34495e;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+    .uml-example {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    .uml-card {
+      background-color: #f0f0f0;
+      color: #000;
+      border: 1px solid #aaa;
+      padding: 1rem;
+      border-radius: 5px;
+    }
+    .uml-label {
+      font-weight: bold;
+      color: #1abc9c;
+      margin-bottom: 0.5rem;
+    }
+    .uml-description {
+      line-height: 1.5;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .nav-button {
+      background-color: #2c3e50;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .nav-button:hover {
+      background-color: #34495e;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .game-container {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    .scenario {
+      border: 2px solid white;
+      border-radius: 8px;
+      padding: 1rem;
+      width: 280px;
+      min-height: 100px;
+      background-color: #34495e;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: left;
+      word-break: normal;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+
+    .cable {
+      border: 2px solid white;
+      border-radius: 8px;
+      padding: 1rem;
+      width: 280px;
+      background-color: #1abc9c;
+      color: #000;
+      cursor: grab;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .cable.dragging {
+      opacity: 0.5;
+    }
+    .dropzone {
+      border: 2px dashed #aaa;
+      min-height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      background-color: #2c3e50;
+      color: #aaa;
+    }
+    .dropzone.correct {
+      border-color: limegreen;
+      color: limegreen;
+    }
+    .dropzone.incorrect {
+      border-color: red;
+      color: red;
+    }
+    .zone-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .navigation-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Seite 1 -->
+  <div class="page active">
+    <h2>Aggregation und Komposition</h2>
+
+    <div class="info-box">
+      <p><strong>Aggregation</strong>: Eine Pflanze <em>hat</em> einen Roboter als Helfer – zum Beispiel zur Pflege oder Überwachung. Der Roboter kann aber auch unabhängig von der Pflanze existieren.</p>
+    </div>
+
+    <div class="info-box">
+      <p><strong>Komposition</strong>: Eine Pflanze <em>besteht aus</em> Blättern, Blüten und Wurzeln. Diese Bestandteile können ohne die Pflanze nicht existieren – sie sind untrennbar mit ihr verbunden.</p>
+    </div>
+
+    <div class="uml-example">
+      <div class="uml-card">
+        <div class="uml-label">Aggregation</div>
+        <div class="uml-description">
+          🌿 Pflanze ◇── Roboter<br>
+          🤖 Der Roboter hilft der Pflanze – lebt aber eigenständig.
+        </div>
+      </div>
+
+      <div class="uml-card">
+        <div class="uml-label">Komposition</div>
+        <div class="uml-description">
+          🌿 Pflanze ◆── Blatt / Wurzel / Blüte<br>
+          🍃 Ohne Pflanze keine Blätter!
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      💡 Tipp: In UML bedeutet ◇ „Aggregation“, ◆ steht für „Komposition“.
+    </div>
+  </div>
+
+  <!-- Seite 2 -->
+  <div class="page">
+    <h2>Kabelsalat – Aggregation vs. Komposition</h2>
+    <p style="text-align:center">Ziehe das passende Bezeichnungen auf das passende Kabel (gestrichelte Linie)!</p>
+
+    <div class="game-container">
+      <div class="zone-wrapper">
+        <div class="scenario" data-answer="Komposition">
+          Jede Pflanze besitzt einen fest verbauten Roboter. Wird die Pflanze zerstört, ist auch der Roboter nicht mehr nutzbar.
+        </div>
+        <div class="dropzone"></div>
+      </div>
+      <div class="zone-wrapper">
+        <div class="scenario" data-answer="Aggregation">
+          Eine Gruppe Pflanzen nutzt gemeinsam einen Roboter, der unabhängig von ihnen existiert.
+        </div>
+        <div class="dropzone"></div>
+      </div>
+      <div class="zone-wrapper">
+        <div class="scenario" data-answer="Assoziation">
+          Eine Pflanze kommuniziert mit einem externen Roboter über eine Verbindung, ohne ihn zu besitzen.
+        </div>
+        <div class="dropzone"></div>
+      </div>
+    </div>
+
+    <h3 style="text-align:center; margin-top:2rem;">🔌 Kabel zur Auswahl</h3>
+    <div class="game-container">
+      <div class="cable" draggable="true" data-type="Komposition">Komposition</div>
+      <div class="cable" draggable="true" data-type="Aggregation">Aggregation</div>
+      <div class="cable" draggable="true" data-type="Assoziation">Assoziation</div>
+    </div>
+  </div>
+
+  <!-- Navigation (immer sichtbar) -->
+  <div class="navigation-container">
+    <div class="navigation">
+      <button class="nav-button" id="prevBtn">⬅️</button>
+      <button class="nav-button" id="nextBtn">➡️</button>
+    </div>
+  </div>
+
+  <script>
+    const pages = document.querySelectorAll('.page');
+    let currentPage = 0;
+
+    const showPage = (index) => {
+      pages.forEach((p, i) => {
+        p.classList.toggle('active', i === index);
+      });
+    };
+
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      if (currentPage < pages.length - 1) {
+        currentPage++;
+        showPage(currentPage);
+      }
+    });
+
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      if (currentPage > 0) {
+        currentPage--;
+        showPage(currentPage);
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      showPage(currentPage);
+    });
+
+    const cables = document.querySelectorAll('.cable');
+    const dropzones = document.querySelectorAll('.dropzone');
+
+    cables.forEach(cable => {
+      cable.addEventListener('dragstart', e => {
+        cable.classList.add('dragging');
+        e.dataTransfer.setData('text/plain', cable.dataset.type);
+      });
+
+      cable.addEventListener('dragend', () => {
+        cable.classList.remove('dragging');
+      });
+    });
+
+    dropzones.forEach(zone => {
+      zone.addEventListener('dragover', e => {
+        e.preventDefault();
+      });
+
+      zone.addEventListener('drop', e => {
+        e.preventDefault();
+        const type = e.dataTransfer.getData('text/plain');
+        const expected = zone.previousElementSibling.dataset.answer;
+
+        if (type === expected) {
+          zone.textContent = `✅ ${type}`;
+          zone.classList.remove('incorrect');
+          zone.classList.add('correct');
+        } else {
+          zone.textContent = `❌ ${type}`;
+          zone.classList.remove('correct');
+          zone.classList.add('incorrect');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

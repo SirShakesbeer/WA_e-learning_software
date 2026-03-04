@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Klassendiagramm Grundlagen 1</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #2c3e50;
+      color: #fff;
+      margin: 0;
+      padding: 1rem;
+    }
+    .page {
+      display: none;
+    }
+    .page.active {
+      display: block;
+    }
+    .class-box {
+      border: 2px solid white;
+      width: 300px;
+      border-radius: 8px;
+      overflow: hidden;
+      font-family: monospace;
+      margin: 2rem auto;
+    }
+    .class-header {
+      background-color: #1abc9c;
+      padding: 0.5rem;
+      text-align: center;
+      font-weight: bold;
+    }
+    .class-attributes, .class-methods {
+      min-height: 2.5rem;
+      padding: 0.5rem;
+    }
+    .class-attributes {
+      background-color: #16a085;
+    }
+    .class-methods {
+      background-color: #148f77;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .nav-button {
+      background-color: #2c3e50;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .nav-button:hover {
+      background-color: #34495e;
+    }
+    .draggables {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+    .card {
+      background-color: #f0f0f0;
+      color: #000;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: grab;
+    }
+    .dropzone {
+      min-height: 2rem;
+    }
+    #feedback, #relation-feedback {
+      text-align: center;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    .selectable {
+      cursor: pointer;
+      outline: 2px solid transparent;
+    }
+    .selectable.selected {
+      outline: 2px dashed yellow;
+    }
+    .connection-line {
+      position: absolute;
+      height: 2px;
+      background-color: white;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Seite 1 -->
+  <div class="page active">
+    <h2>Grundstruktur eines Klassendiagramms</h2>
+    <p>
+      In der objektorientierten Programmierung ist eine <strong>Klasse</strong> wie ein Bauplan.
+      Im sogenannten <strong>Klassendiagramm</strong> zeichnen wir diesen Bauplan auf – damit wir genau sehen können, welche Eigenschaften (Attribute) und welche Fähigkeiten (Methoden) ein Objekt haben soll.
+    </p>
+    <p>
+      <strong>So ist ein Klassendiagramm aufgebaut:</strong><br><br>
+      <strong>Oben</strong> steht der <strong>Klassenname</strong>, z.B. Roboter<br>
+      <strong>In der Mitte</strong> stehen die <strong>Attribute</strong>, z.B. farbe und matrialart<br>
+      <strong>Unten</strong> stehen die <strong>Methoden</strong>, z.B. fliegen() und bewegeDich()
+    </p>
+    <p><strong>So sieht das Grundgerüst einer Beispiel-Klasse im Diagramm aus:</strong><br><br></p>
+    <div class="class-box">
+      <div class="class-header">Roboter</div>
+      <div class="class-attributes">
+        <div>- farbe: String</div>
+        <div>- materialart: String</div>
+      </div>
+      <div class="class-methods">
+        <div>+ fliegen(): boolean</div>
+        <div>+ bewegeDich(): boolean</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Seite 2 -->
+  <div class="page">
+    <h2>Übung: Ziehe die Bestandteile in die passenden Klassendiagramme</h2><br>
+    <p>Zwei Klassen – <strong>Roboter</strong> und <strong>Pflanze</strong> – brauchen ihre passenden Attribute und Methoden. Ziehe die Kärtchen jeweils in den passenden Abschnitt der richtigen Klasse:</p><br>
+    <ul>
+      <li>Obere Teil = Attribute</li><br>
+      <li>Untere Teil = Methoden</li><br>
+    </ul>
+    <div class="draggables">
+      <div class="card" draggable="true" data-target="roboter-attr">- materialFarbe: String</div>
+      <div class="card" draggable="true" data-target="roboter-attr">- materialart: String</div>
+      <div class="card" draggable="true" data-target="roboter-meth">+ springe(): void</div>
+      <div class="card" draggable="true" data-target="roboter-meth">+ fliegen(): boolean</div>
+      <div class="card" draggable="true" data-target="pflanze-attr">- bluetenFarbe: String</div>
+      <div class="card" draggable="true" data-target="pflanze-attr">- anzahlBlaetter: int</div>
+      <div class="card" draggable="true" data-target="pflanze-meth">+ wachse(): void</div>
+      <div class="card" draggable="true" data-target="pflanze-meth">+ photosynthese(): boolean</div>
+    </div>
+    <div class="draggables">
+      <div class="class-box">
+        <div class="class-header">Roboter</div>
+        <div class="class-attributes dropzone" id="roboter-attr"></div>
+        <div class="class-methods dropzone" id="roboter-meth"></div>
+      </div>
+      <div class="class-box">
+        <div class="class-header">Pflanze</div>
+        <div class="class-attributes dropzone" id="pflanze-attr"></div>
+        <div class="class-methods dropzone" id="pflanze-meth"></div>
+      </div>
+    </div>
+    <p id="feedback"></p>
+  </div>
+
+  <!-- Seite 3 -->
+  <div class="page">
+    <h2>Beziehungen zwischen Klassen</h2>
+    <p>
+        Klassen können miteinander in Beziehung stehen – zum Beispiel, wenn ein Objekt das andere kennt oder nutzt.
+        Solche Verbindungen nennt man <strong>Assoziationen</strong>.
+    </p>
+    <p>
+        Eine <strong>binäre Assoziation</strong> verbindet genau zwei Klassen. Im UML-Diagramm wird sie durch eine einfache Linie dargestellt.
+    </p>
+    <h3>Beispiel: Eine Pflanze und ein Roboter sind verbunden, weil Die Pflanze den Roboter steuert.</h3>
+    <div style="position: relative; height: 200px; margin: 2rem 0;">
+      <div class="connection-line" style="top: 80px; left: 0; width: 100%;"></div>
+      <div class="class-box" style="min-width: 220px; position: absolute; left: 0; top: 20px;">
+        <div class="class-header">Pflanze</div>
+        <div class="class-attributes"><div>- wasserbedarf: String</div></div>
+        <div class="class-methods"><div>+ wachse(): void</div></div>
+      </div>
+      <div class="class-box" style="min-width: 220px; position: absolute; right: 0; top: 20px;">
+        <div class="class-header">Roboter</div>
+        <div class="class-attributes"><div>- farbe: String</div></div>
+        <div class="class-methods"><div>+ fliegen(): boolean</div></div>
+      </div>
+    </div>
+    <p>Diese Linie zeigt eine einfache Beziehung zwischen den Klassen. Man sagt auch: <em>Sie stehen in einer Assoziation</em>.</p>
+  </div>
+
+  <!-- Seite 4 - aktiv -->
+  <div class="page">
+    <h2>Übung: Erkenne die Assoziation</h2>
+    <p>Klicke auf zwei Klassen, die miteinander in Beziehung stehen sollen.</p>
+    <p>Dabei sollen folegende Beziehungen dargestellt werden:</p>
+    <ul>
+        <li>Ein Pflanze steuert einen Roboter</li>
+        <li>Eine Pflanze lebt in einem Gewächshaus</li>
+    </ul>
+
+    <div style="position: relative; height: 320px; margin-top: 2rem;">
+
+    <!-- Neue Linie für Pflanze ↔ Roboter -->
+    <div id="line-plant-robot" class="connection-line"
+        style="display: none; top: 100px; left: 15%; width: 70%; height: 2px;"></div>
+
+    <!-- Neue Linie für Pflanze ↔ Gewächshaus -->
+    <div id="line-plant-greenhouse" class="connection-line"
+        style="display: none; top: 150px; left: 20%; width: 30%; height: 2px; transform: rotate(25deg); transform-origin: left;"></div>
+
+
+      <div id="klasse1" class="class-box selectable"
+           style="position: absolute; top: 20px; left: 5%; width: 180px; font-size: 0.8rem;">
+        <div class="class-header">Pflanze</div>
+        <div class="class-attributes"><div>- groesse: double</div></div>
+        <div class="class-methods"><div>+ wachse(): void</div></div>
+      </div>
+
+      <div id="klasse2" class="class-box selectable"
+           style="position: absolute; top: 20px; right: 5%; width: 180px; font-size: 0.8rem;">
+        <div class="class-header">Roboter</div>
+        <div class="class-attributes"><div>- farbe: String</div></div>
+        <div class="class-methods"><div>+ fliegen(): boolean</div></div>
+      </div>
+
+      <div id="klasse3" class="class-box selectable"
+           style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 180px; font-size: 0.8rem;">
+        <div class="class-header">Gewaechshaus</div>
+        <div class="class-attributes"><div>- temperatur: String</div></div>
+        <div class="class-methods"><div>+ pflegen: void</div></div>
+        </div>
+
+    </div>
+    <p id="relation-feedback"></p>
+  </div>
+
+  <!-- Navigation -->
+  <div class="navigation">
+    <button class="nav-button" id="prevBtn">⬅️</button>
+    <button class="nav-button" id="nextBtn">➡️</button>
+  </div>
+
+  <!-- JS -->
+  <script>
+    const pages = document.querySelectorAll('.page');
+    let currentPage = [...pages].findIndex(p => p.classList.contains('active'));
+    const showPage = (index) => {
+      pages.forEach((p, i) => p.classList.toggle('active', i === index));
+    };
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      if (currentPage < pages.length - 1) {
+        currentPage++;
+        showPage(currentPage);
+      }
+    });
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      if (currentPage > 0) {
+        currentPage--;
+        showPage(currentPage);
+      }
+    });
+
+    const feedback = document.getElementById('feedback');
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('dragstart', e => {
+        e.dataTransfer.setData('text/plain', card.outerHTML);
+        e.dataTransfer.effectAllowed = "move";
+      });
+    });
+    document.querySelectorAll('.dropzone').forEach(zone => {
+      zone.addEventListener('dragover', e => e.preventDefault());
+      zone.addEventListener('drop', e => {
+        e.preventDefault();
+        const data = e.dataTransfer.getData('text/plain');
+        const element = new DOMParser().parseFromString(data, "text/html").body.firstChild;
+        const original = [...document.querySelectorAll('.card')].find(c => c.textContent === element.textContent);
+        if (zone.id === element.dataset.target && original) {
+          element.draggable = false;
+          zone.appendChild(element);
+          original.remove();
+          feedback.textContent = "Richtig zugeordnet!";
+          feedback.style.color = "lime";
+        } else {
+          feedback.textContent = "Falsch. Probiere es noch einmal!";
+          feedback.style.color = "orange";
+        }
+      });
+    });
+
+    const selected = [];
+    const relationFeedback = document.getElementById("relation-feedback");
+
+    document.querySelectorAll('.selectable').forEach(box => {
+        box.addEventListener('click', () => {
+        if (box.classList.contains("selected")) return;
+        box.classList.add("selected");
+        selected.push(box);
+
+        if (selected.length === 2) {
+            const validRelations = [
+            ["klasse1", "klasse2"], // Pflanze ↔ Roboter
+            ["klasse1", "klasse3"], // Pflanze ↔ Gewächshaus
+            ["klasse2", "klasse1"],
+            ["klasse3", "klasse1"]
+            ];
+
+            const id1 = selected[0].id;
+            const id2 = selected[1].id;
+            const isValid = validRelations.some(([a, b]) => id1 === a && id2 === b);
+
+            if (isValid) {
+            if ((id1 === "klasse1" && id2 === "klasse2") || (id1 === "klasse2" && id2 === "klasse1")) {
+                document.getElementById("line-plant-robot").style.display = "block";
+            }
+            if ((id1 === "klasse1" && id2 === "klasse3") || (id1 === "klasse3" && id2 === "klasse1")) {
+                document.getElementById("line-plant-greenhouse").style.display = "block";
+            }
+            relationFeedback.textContent = "Richtig: Diese beiden Klassen stehen in Beziehung.";
+            relationFeedback.style.color = "lime";
+            } else {
+            relationFeedback.textContent = "Diese Klassen sind nicht direkt verbunden. Versuche es erneut.";
+            relationFeedback.style.color = "orange";
+            }
+
+            selected.forEach(el => el.classList.remove("selected"));
+            selected.length = 0;
+        }
+        });
+    });
+
+  </script>
+</body>
+</html>
