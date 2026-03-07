@@ -500,7 +500,7 @@
                         {
                          "name":"exitUrl",
                          "type":"string",
-                         "value":"haupt.tmj#from-programmier"
+                        "value":"Main Room.tmj#from-git"
                         }],
                  "rotation":0,
                  "type":"area",
@@ -512,7 +512,7 @@
                 {
                  "height":32,
                  "id":19,
-                 "name":"from-haupt",
+                 "name":"from-hub",
                  "properties":[
                         {
                          "name":"start",
@@ -534,7 +534,7 @@
                         {
                          "name":"exitUrl",
                          "type":"string",
-                         "value":"programmier.tmj#from-land"
+                        "value":"Git Room.tmj#from-land"
                         }],
                  "rotation":0,
                  "type":"area",
@@ -568,7 +568,7 @@
                         {
                          "name":"exitUrl",
                          "type":"string",
-                         "value":"programmier.tmj#from-boat"
+                        "value":"Git Room.tmj#from-boat"
                         }],
                  "rotation":0,
                  "type":"area",
@@ -656,7 +656,7 @@
         {
          "name":"mapDescription",
          "type":"string",
-         "value":"A perfect virtual office to get started with WorkAdventure!"
+         "value":"A nice little garden area."
         }, 
         {
          "name":"mapImage",
@@ -666,12 +666,12 @@
         {
          "name":"mapName",
          "type":"string",
-         "value":"Programmierraum"
+         "value":"Garden"
         }, 
         {
          "name":"script",
          "type":"string",
-         "value":"src\/main_programmier.ts"
+         "value":"src\/main_git.ts"
         }],
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

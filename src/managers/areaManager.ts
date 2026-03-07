@@ -1,6 +1,6 @@
 import { startConversation, currentArea, setCurrentArea, continueConversation } from "./dialogueManager";
 
-const chatZones = ['HerrHolze', 'Kaktus', 'HerrTöpfner', 'Waldmann', 'WaldmannGit'];
+const chatZones = ['HerrHolze', 'Kaktus', 'HerrTöpfner', 'Waldmann', 'WaldmannGit', 'noWay', 'susPlant', 'roomLable1', 'roomLable2'];
 const triggerZones = ['Kaktus-trigger', 'Waldmann-trigger'];
 
 export function initAreas() {

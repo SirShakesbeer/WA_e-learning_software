@@ -1,0 +1,183 @@
+{
+  "Kaktus": {
+    "start": {
+      "message": "Welcome... or should I say: survivor, finally. We already thought we'd have to wait centuries longer for someone like you. Our world – once full of life – is now only a rusty shadow. The machines we built to help us turned against us. But not all life was erased...\n\nWe plants – deeply rooted, yet full of spirit – survived. We need your mind, your hands, your knowledge. You must help us build new bodies. Sturdy shells to strike back at the machines. Plants in robot armor... who would have thought?\n\nBut enough drama for now. First: talk to my colleague over there – Mr. Holze. He will explain how to get started.\n\na: I will speak with Mr. Holze.\nb: Who are you anyway?",
+      "options": {
+        "a": "a",
+        "b": "b"
+      }
+    },
+    "a": {
+      "message": "Good. Hurry up. Every moment counts. The machines are getting closer, and our energy is not endless. You will find Dr. Toepfner next to the decayed data tree.\n\na: Back",
+      "options": {
+        "a": "start"
+      }
+    },
+    "b": {
+      "message": "Us? We are what remained after the silicon fire consumed everything. Plants, yes, but infused with old knowledge, fed by the last rays of sunlight piercing the fog. Some call us 'the root intelligence'. But names do not matter. Deeds do. And yours begins now.\n\na: I will speak with Mr. Holze.\nb: Back",
+      "options": {
+        "a": "a",
+        "b": "start"
+      }
+    }
+  },
+  "HerrHolze": {
+    "start": {
+      "message": "Ah, so you are the new beacon of hope... good, good. I am Mr. Holze – root architect and keeper of data. You want to know how to plan structures before building them? Then open your ears like a fern at dawn.\n\nWe call them *class diagrams* – blueprints for software bodies. Imagine them as robot construction plans: they show what is inside (attributes), what they can do (methods), and how they are related.\n\na: Tell me more about attributes and methods.\nb: What does inheritance mean?",
+      "options": {
+        "a": "a",
+        "b": "b"
+      }
+    },
+    "a": {
+      "message": "Good. Every object – or in our case: every robot body – has *attributes* – these are data fields such as 'color', 'energyLevel', or 'attackPower'.\n\n*Methods* are the things that body can do: 'attack()', 'heal()', 'recharge()'. In class diagrams, we usually write them below the class name.\n\nThat way, you can see at a glance what a thing is and what it can do.\n\na: And what was inheritance again?\nb: Tell me about interfaces.",
+      "options": {
+        "a": "b",
+        "b": "c"
+      }
+    },
+    "b": {
+      "message": "Ah, inheritance... the ancient principle of passing things on. Imagine we have a class 'Robot'. It has basic things like 'move()' and 'charge()'. Now we create a new class 'CombatRobot' based on Robot – it *inherits* everything Robot can do and adds its own methods: 'attack()', 'defend()', and so on.\n\nInheritance saves effort – we build on what already exists. In diagrams, we show this with an arrow from child class to parent class.\n\na: And what are interfaces?\nb: How else can classes be connected?",
+      "options": {
+        "a": "d",
+        "b": "e"
+      }
+    },
+    "c": {
+      "message": "Interfaces, yes... they are like contracts. Imagine a class committing to provide specific methods – but *how* it does that is up to the class.\n\nAn interface can say, for example: 'Whoever implements this interface must provide a method called fly().'\n\nIn a class diagram, you often recognize this by a dashed line – it shows: 'This class promises this behavior.'\n\na: What do you mean by 'how classes are connected'?\nb: Back",
+      "options": {
+        "a": "e",
+        "b": "start"
+      }
+    },
+    "d": {
+      "message": "Exactly. Interfaces are like roles or masks. A class can implement many interfaces, as if wearing multiple masks.\n\nA 'flying unit' might implement both 'Flyable' AND 'TargetTrackable'. Then we know: it can fly AND track targets – without knowing its full construction.\n\na: What do you mean by 'how classes are connected'?\nb: Back",
+      "options": {
+        "a": "e",
+        "b": "start"
+      }
+    },
+    "e": {
+      "message": "Ah – relationships between classes. There are several.\n\nWhen a class has an *attribute* that is another class, we call that *composition* or *aggregation*. For example: a 'Robot' has an 'EnergyModule'.\n\n*Multiplicity* tells us how many: exactly *one* module? Or *several*? 0...1? 1...*? These numbers help with planning.\n\nIf classes are closely linked but can survive separately, it is aggregation. If they are inseparable, it is composition.\n\na: Back",
+      "options": {
+        "a": "start"
+      }
+    },
+    "end": {
+      "message": "That is all for now. Get ready to put this knowledge into practice!\n\na: Back",
+      "options": {
+        "a": "start"
+      }
+    }
+  },
+  "HerrTöpfner": {
+    "start": {
+      "message": "",
+      "options": {
+        "a": "",
+        "b": ""
+      }
+    },
+    "a": {
+      "message": "",
+      "options": {
+        "a": "",
+        "b": ""
+      }
+    }
+  },
+  "Waldmann": {
+    "start": {
+      "message": "",
+      "options": {
+        "a": "",
+        "b": ""
+      }
+    },
+    "a": {
+      "message": "",
+      "options": {
+        "a": "",
+        "b": ""
+      }
+    }
+  },
+  "Waldmann-trigger": {
+    "start": {
+      "message": "Hey, up here! The apple tree!"
+    }
+  },
+  "Kaktus-trigger": {
+    "start": {
+      "message": "Over here! Yes, far right, at the end of the hallway! I am the cactus!"
+    }
+  },
+  "WaldmannGit": {
+    "start": {
+      "message": "Now that you have planned and implemented the behavior, it is time to secure your work. In software development, we call this *version control*. And there is a powerful tool for that: Git.\n\nGit is like a huge archive where every change to your code is recorded. You can always go back, compare changes, and even collaborate with others without losing track.\n\nLet us begin.\n\na: Let's go!!!",
+      "options": {
+        "a": "b"
+      }
+    },
+    "b": {
+      "message": "First, get familiar with the basics. Read about Git *add*, *commit*, and *push* at the PC. Then come back here so we can begin.\n\na: I already know Git well enough.\nb: Let's start!",
+      "options": {
+        "a": "c",
+        "b": "c"
+      }
+    },
+    "c": {
+      "message": "Very nice! Below you can see your changes from the last room. They are represented by the yellow lamps. To *add* them, push them into the staging zone.\n\na: I completed everything.\nb: What are those red lamps?",
+      "options": {
+        "a": "d",
+        "b": "e"
+      }
+    },
+    "d": {
+      "message": "Your changes are now in the stage. You can now step on the commit pressure plate to *commit* the changes.\n\na: Done!\nb: What are those red lamps?",
+      "options": {
+        "a": "f",
+        "b": "e"
+      }
+    },
+    "e": {
+      "message": "Oh, it looks like some bugs slipped in. It is better not to *commit* those changes. Push only the correct changes into the *add* zone.\n\na: Back.",
+      "options": {
+        "a": "c"
+      }
+    },
+    "f": {
+      "message": "Well done! Your changes are now committed. To share them with others, you still need to push the commits. Push the commit crate with your changes into the vehicle so it can be transported further.\n\na: All done.\nb: Back.",
+      "options": {
+        "a": "g",
+        "b": "d"
+      }
+    },
+    "g": {
+      "message": "That is how it should be. You now know the Git basics! Next we will look at branches and merging, but first you can read about it at the PC. Right now this job is occupied by another user.\n\na: Back.",
+      "options": {
+        "a": "start"
+      }
+    }
+  },
+  "noWay": {
+    "start": {
+      "message": "You should go back to work, it is too early to call it a day."
+    }
+  },
+  "susPlant": {
+    "start": {
+      "message": "You feel watched?"
+    }
+  },
+  "roomLable1": {
+    "start": {
+      "message": "This shows which room this is."
+    }
+  },
+  "roomLable2": {
+    "start": {
+      "message": "This shows which room this is."
+    }
+  }
+}

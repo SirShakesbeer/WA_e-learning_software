@@ -1,14 +1,22 @@
+import { BOX_PUSH_DELAY_DEFAULT_MS, BOX_PUSH_DELAY_FAST_MS } from "./boxPushSettings";
+
 const map      = await WA.room.getTiledMap();
 const mapX     = map.width  ?? 32;
 const mapY     = map.height ?? 32;
 const collisionData  = ((map.layers[1] as { data?: number[] }).data) ?? [];
-export const boxes: PushBox[] = [];
+const boxes: PushBox[] = [];
 let boxID: number = 0;
 
 const tile_normal = "boxObj";
 const tile_buggy = "boxObjBuggy";
 const tile_correct = "boxObjCorrect";
 const tile_pushCommit = "boxObjPushCommit";
+
+export type BoxKind = "normal" | "buggy" | "correct" | "pushCommit";
+
+export function getBoxes(): ReadonlyArray<PushBox> {
+    return boxes;
+}
 
 export async function createBoxes(boxIndex: number, initX: number, initY: number, bugprobability?: number, isPushCommit?: boolean) {
     /**
@@ -39,7 +47,7 @@ export async function createBoxes(boxIndex: number, initX: number, initY: number
         if (isPushCommit) {
             boxes.push(new PushCommitBox((boxID++).toString(), startX, startY, tile_pushCommit));
         } else if (!bugprobability) {
-            boxes.push(new PushBox((boxID++).toString(), startX, startY, tile_normal));
+            boxes.push(new PushBox((boxID++).toString(), startX, startY, tile_normal, BOX_PUSH_DELAY_FAST_MS, "normal"));
         } else if(!isbuggy || i <= 1) {
             boxes.push(new CorrectBox((boxID++).toString(), startX, startY, tile_correct));
         } else if (isbuggy) {
@@ -73,9 +81,9 @@ export function destroyBox(box: PushBox) {
     console.log(`Destroyed box ${box.id}`);
 }
 
-export function destroyBoxesByType(type: "BuggyBox" | "CorrectBox" | "PushCommitBox") {
+export function destroyBoxesByType(type: BoxKind) {
     // Kopie erstellen, um während der Iteration sicher zu löschen
-    const toDestroy = boxes.filter(b => b.constructor.name === type);
+    const toDestroy = boxes.filter(b => b.kind === type);
     toDestroy.forEach(box => {
         destroyBox(box);
     });
@@ -99,17 +107,29 @@ export class PushBox {
   y: number;
   areas: AreaGroup;
   tileID: string;
+        readonly kind: BoxKind;
+    private readonly pushDelayMs: number;
+    private holdTimers: {
+        top?: ReturnType<typeof setTimeout>;
+        bottom?: ReturnType<typeof setTimeout>;
+        left?: ReturnType<typeof setTimeout>;
+        right?: ReturnType<typeof setTimeout>;
+    } = {};
 
   constructor(
     public readonly id: string,          // z. B. "box1"
     startX: number,
     startY: number,
-    tileID: string
+        tileID: string,
+                pushDelayMs: number,
+                kind: BoxKind
   ) {
     this.x = startX;
     this.y = startY;
     this.areas = this.createPushAreas(this.x * 32, this.y * 32);
     this.tileID = tileID;
+                this.kind = kind;
+        this.pushDelayMs = pushDelayMs;
     console.log(`Created push areas for box ${this.id}:`, this.areas.top.name, this.areas.bottom.name, this.areas.left.name, this.areas.right.name);
     this.registerListeners();
     WA.room.setTiles([
@@ -182,19 +202,51 @@ export class PushBox {
 
   /** Listener pro Area einmalig registrieren */
   private registerListeners() {
-    WA.room.area.onEnter(this.areas.top.name).subscribe( () => {
-        this.moveBox(this.x, (this.y + 1), "down");
+    WA.room.area.onEnter(this.areas.top.name).subscribe(() => {
+        this.startHoldTimer("top", () => this.moveBox(this.x, this.y + 1, "down"));
     });
-    WA.room.area.onEnter(this.areas.bottom.name).subscribe( () => {
-        this.moveBox(this.x, (this.y - 1), "up");
+    WA.room.area.onLeave(this.areas.top.name).subscribe(() => {
+        this.clearHoldTimer("top");
     });
-    WA.room.area.onEnter(this.areas.left.name).subscribe( () => {
-        this.moveBox((this.x + 1), this.y, "right");
+
+    WA.room.area.onEnter(this.areas.bottom.name).subscribe(() => {
+        this.startHoldTimer("bottom", () => this.moveBox(this.x, this.y - 1, "up"));
     });
-    WA.room.area.onEnter(this.areas.right.name).subscribe( () => {
-        this.moveBox((this.x - 1), this.y, "left");
+    WA.room.area.onLeave(this.areas.bottom.name).subscribe(() => {
+        this.clearHoldTimer("bottom");
     });
+
+    WA.room.area.onEnter(this.areas.left.name).subscribe(() => {
+        this.startHoldTimer("left", () => this.moveBox(this.x + 1, this.y, "right"));
+    });
+    WA.room.area.onLeave(this.areas.left.name).subscribe(() => {
+        this.clearHoldTimer("left");
+    });
+
+    WA.room.area.onEnter(this.areas.right.name).subscribe(() => {
+        this.startHoldTimer("right", () => this.moveBox(this.x - 1, this.y, "left"));
+    });
+    WA.room.area.onLeave(this.areas.right.name).subscribe(() => {
+        this.clearHoldTimer("right");
+    });
+
     console.log(`Registered listeners for box ${this.id}`, this.areas.top.name, this.areas.bottom.name, this.areas.left.name, this.areas.right.name);
+  }
+
+  private startHoldTimer(direction: "top" | "bottom" | "left" | "right", onHoldComplete: () => void) {
+    this.clearHoldTimer(direction);
+    this.holdTimers[direction] = setTimeout(() => {
+        onHoldComplete();
+        this.clearHoldTimer(direction);
+    }, this.pushDelayMs);
+  }
+
+  private clearHoldTimer(direction: "top" | "bottom" | "left" | "right") {
+    const timer = this.holdTimers[direction];
+    if (timer) {
+        clearTimeout(timer);
+        this.holdTimers[direction] = undefined;
+    }
   }
 
   private createPushAreas(startX: number, startY: number): AreaGroup {
@@ -238,7 +290,7 @@ export class PushBox {
 export class CorrectBox extends PushBox {
     tileID: string;
     constructor(id: string, startX: number, startY: number, tileID: string) {
-        super(id, startX, startY, tileID);
+        super(id, startX, startY, tileID, BOX_PUSH_DELAY_FAST_MS, "correct");
         this.tileID = tileID;
     }
 }
@@ -246,7 +298,7 @@ export class CorrectBox extends PushBox {
 export class BuggyBox extends PushBox {
     tileID: string;
     constructor(id: string, startX: number, startY: number, tileID: string) {
-        super(id, startX, startY, tileID);
+        super(id, startX, startY, tileID, BOX_PUSH_DELAY_FAST_MS, "buggy");
         this.tileID = tileID;
     }
 }
@@ -254,7 +306,7 @@ export class BuggyBox extends PushBox {
 export class PushCommitBox extends PushBox {
     tileID: string;
     constructor(id: string, startX: number, startY: number, tileID: string) {
-        super(id, startX, startY, tileID);
+        super(id, startX, startY, tileID, BOX_PUSH_DELAY_DEFAULT_MS, "pushCommit");
         this.tileID = tileID;
     }
 }

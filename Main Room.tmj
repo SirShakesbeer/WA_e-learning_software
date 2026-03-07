@@ -297,7 +297,7 @@
                         {
                          "name":"exitUrl",
                          "type":"string",
-                         "value":"planung.tmj#from-haupt"
+                        "value":"Planning Room.tmj#from-hub"
                         }],
                  "rotation":0,
                  "type":"area",
@@ -314,7 +314,7 @@
                         {
                          "name":"exitUrl",
                          "type":"string",
-                         "value":"programmier.tmj#from-haupt"
+                        "value":"Git Room.tmj#from-hub"
                         }],
                  "rotation":0,
                  "type":"area",
@@ -348,7 +348,7 @@
                 {
                  "height":30.4666666666667,
                  "id":31,
-                 "name":"from-planung",
+                 "name":"from-planning",
                  "properties":[
                         {
                          "name":"start",
@@ -365,7 +365,7 @@
                 {
                  "height":31.8,
                  "id":32,
-                 "name":"from-programmier",
+                 "name":"from-git",
                  "properties":[
                         {
                          "name":"start",
@@ -488,7 +488,7 @@
         {
          "name":"mapDescription",
          "type":"string",
-         "value":"A perfect virtual office to get started with WorkAdventure!"
+         "value":"The entry point to this little serious game."
         }, 
         {
          "name":"mapImage",
@@ -498,12 +498,12 @@
         {
          "name":"mapName",
          "type":"string",
-         "value":"Office"
+         "value":"Main Room"
         }, 
         {
          "name":"script",
          "type":"string",
-         "value":"src\/main_haupt.ts"
+         "value":"src\/main_hub.ts"
         }],
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
@@ -665,7 +665,7 @@
         {
          "columns":12,
          "firstgid":3956,
-         "image":"tilesets\/WA_Decoration.png",
+         "image":"tilesets\/WA_Decoration2.png",
          "imageheight":256,
          "imagewidth":384,
          "margin":0,

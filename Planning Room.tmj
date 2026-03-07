@@ -316,7 +316,7 @@
                         {
                          "name":"exitUrl",
                          "type":"string",
-                         "value":"haupt.tmj#from-planung"
+                        "value":"Main Room.tmj#from-planning"
                         }],
                  "rotation":0,
                  "type":"area",
@@ -328,7 +328,7 @@
                 {
                  "height":32,
                  "id":23,
-                 "name":"from-haupt",
+                 "name":"from-hub",
                  "properties":[
                         {
                          "name":"start",
@@ -552,22 +552,22 @@
         {
          "name":"mapDescription",
          "type":"string",
-         "value":"A perfect virtual office to get started with WorkAdventure!"
+         "value":"A room to learn about planning software development and engineering basics."
         }, 
         {
          "name":"mapImage",
          "type":"string",
-         "value":"conference.png"
+         "value":"office.png"
         }, 
         {
          "name":"mapName",
          "type":"string",
-         "value":"Conference"
+         "value":"Planning Room"
         }, 
         {
          "name":"script",
          "type":"string",
-         "value":"src\/main_planung.ts"
+         "value":"src\/main_planning.ts"
         }],
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

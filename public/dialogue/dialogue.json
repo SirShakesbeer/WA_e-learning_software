@@ -159,5 +159,25 @@
         "a": "start"
       }
     }
+  },
+  "noWay": {
+    "start": {
+      "message": "Du solltest lieber Arbeiten gehen, es ist zu frueh fuer Feierabend"
+    }
+  },
+  "susPlant": {
+    "start": {
+      "message": "Du fuehlst dich beobachtet?"
+    }
+  },
+  "roomLable1": {
+    "start": {
+      "message": "Hier steht welches Zimmer es ist"
+    }
+  },
+  "roomLable2": {
+    "start": {
+      "message": "Hier steht welches Zimmer es ist"
+    }
   }
 }
